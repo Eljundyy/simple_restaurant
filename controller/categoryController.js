@@ -1,4 +1,7 @@
 exports.getAllCategories = (req, res) => {
+    //menampilkan waktu request
+    console.log(`Request Time: ${req.requestTime}`);
+
 res.status(200).json({
     status: "success",
     data: [
