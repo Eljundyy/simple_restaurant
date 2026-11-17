@@ -11,11 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.hasMany(models.orderDetail, {foreignKey: "order_id"});
     }
   }
   order.init({
-    nama: DataTypes.STRING,
-    total: DataTypes.INTEGER,
+    customer_name: DataTypes.STRING,
+    total: {
+      type: DataTypes.INTEGER,
+      validate: {min: 0}
+    },
     status: DataTypes.STRING
   }, {
     sequelize,

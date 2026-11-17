@@ -11,14 +11,23 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(models.menus, {foreignKey: "menu_id"});
+      this.belongsTo(models.order, {foreignKey: "order_id"});
     }
   }
   orderDetail.init({
     menu_id: DataTypes.INTEGER,
     order_id: DataTypes.INTEGER,
-    qty: DataTypes.INTEGER,
-    subtotal: DataTypes.INTEGER
-  }, {
+    qty: {
+      type: DataTypes.INTEGER,
+      validate: {min: 1}
+    },
+    subtotal: {
+      type: DataTypes.INTEGER,
+      validate: {min: 0}
+    }
+  },
+  {
     sequelize,
     modelName: 'orderDetail',
   });

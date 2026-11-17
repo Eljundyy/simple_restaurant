@@ -11,12 +11,20 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(models.Category, { foreignKey: "category_id" });
+      this.hasMany(models.orderDetail, {foreignKey: "menus_id"});
     }
   }
   menus.init({
     nama: DataTypes.STRING,
-    harga: DataTypes.INTEGER,
-    stock: DataTypes.INTEGER,
+    harga: { 
+      type: DataTypes.INTEGER, 
+      validate: {min: 0}
+    },
+    stock: {
+      type: DataTypes.INTEGER,
+      validate: {min: 0}
+    },
     image: DataTypes.STRING,
     category_id: DataTypes.INTEGER
   }, {
